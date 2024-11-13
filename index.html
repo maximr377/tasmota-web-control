@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Tasmota</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('https://www.example.com/path-to-your-image.jpg'); /* Cambia esta URL por el enlace de tu imagen */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para mejorar la legibilidad */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #4CAF50; /* Color del botón */
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 style="color: white;">Controlar Dispositivo Tasmota</h1>
+        <button onclick="turnOnTasmota()">Encender Dispositivo</button>
+    </div>
+
+    <script>
+        function turnOnTasmota() {
+            const url = "http://maximrhassio.duckdns.org:82/cm?cmnd=Power1%20On";
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    console.log("Comando enviado:", data);
+                    alert("Dispositivo encendido!");
+                })
+                .catch(error => {
+                    console.error("Error al enviar el comando:", error);
+                    alert("Hubo un error al intentar encender el dispositivo.");
+                });
+        }
+    </script>
+
+</body>
+</html>
