@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background-image: url('https://www.example.com/path-to-your-image.jpg'); /* Cambia esta URL por la de tu imagen */
+            background-image: url('https://www.example.com/path-to-your-image.jpg'); /* Cambia esta URL por el enlace de tu imagen */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -50,17 +50,21 @@
 
     <script>
         function turnOnTasmota() {
-            const url = "http://maximrtimbre.duckdns.org:82/cm?cmnd=Power1%20On";
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    console.log("Comando enviado:", data);
-                    alert("Dispositivo encendido!");
-                })
-                .catch(error => {
-                    console.error("Error al enviar el comando:", error);
-                    alert("Hubo un error al intentar encender el dispositivo.");
-                });
+            const url = "http://maximrhassio.duckdns.org:82/cm?cmnd=Power1%20On";
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log("Comando enviado:", xhr.responseText);
+                        alert("Dispositivo encendido!");
+                    } else {
+                        console.error("Error al enviar el comando:", xhr.status, xhr.statusText);
+                        alert("Hubo un error al intentar encender el dispositivo.");
+                    }
+                }
+            };
+            xhr.send();
         }
     </script>
 
