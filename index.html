@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background-image: url('https://www.example.com/path-to-your-image.jpg'); /* Cambia esta URL por el enlace de tu imagen */
+            background-image: url('https://www.example.com/path-to-your-image.jpg'); /* Cambia esta URL por la de tu imagen */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -50,7 +50,7 @@
 
     <script>
         function turnOnTasmota() {
-            const url = "http://maximrhassio.duckdns.org:82/cm?cmnd=Power1%20On";
+            const url = "http://maximrtimbre.duckdns.org:82/cm?cmnd=Power1%20On";
             fetch(url)
                 .then(response => response.text())
                 .then(data => {
