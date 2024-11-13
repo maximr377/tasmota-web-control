@@ -50,21 +50,21 @@
 
     <script>
         function turnOnTasmota() {
-            const url = "http://maximrhassio.duckdns.org:82/cm?cmnd=Power1%20On";
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", url, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        console.log("Comando enviado:", xhr.responseText);
-                        alert("Dispositivo encendido!");
-                    } else {
-                        console.error("Error al enviar el comando:", xhr.status, xhr.statusText);
-                        alert("Hubo un error al intentar encender el dispositivo.");
-                    }
-                }
-            };
-            xhr.send();
+            // URL del proxy (opcional) que ayuda a evitar problemas de CORS
+            const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+            const targetUrl = "http://maximrhassio.duckdns.org:82/cm?cmnd=Power1%20On";
+
+            // Usar fetch con el proxy para evitar problemas de CORS
+            fetch(proxyUrl + targetUrl)
+                .then(response => response.text())
+                .then(data => {
+                    console.log("Comando enviado:", data);
+                    alert("Dispositivo encendido!");
+                })
+                .catch(error => {
+                    console.error("Error al enviar el comando:", error);
+                    alert("Hubo un error al intentar encender el dispositivo.");
+                });
         }
     </script>
 
